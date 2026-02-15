@@ -344,10 +344,12 @@
     <nav>
         <div class="logo">easein</div>
         <div class="nav-right-cluster">
-            <a href="pricing.html" class="nav-link">pricing</a>
-            <a href="science.html" class="nav-link">science & methodology</a>
-            <a href="continue.html" class="btn-outline">continue</a>
-            <a href="getstarted.html" class="btn-primary">get started</a>
+            <div class="hidden md:flex gap-6 items-center">
+                <a href="pricing.html" class="nav-link">pricing</a>
+                <a href="science.html" class="nav-link">science & methodology</a>
+                <a href="continue.html" class="btn-outline">continue</a>
+                <a href="getstarted.html" class="btn-primary">get started</a>
+            </div>
             <button id="menu-btn" class="p-2 space-y-1.5 focus:outline-none ml-2">
                 <div class="w-6 h-0.5 bg-current"></div>
                 <div class="w-4 h-0.5 bg-current ml-auto"></div>
@@ -358,6 +360,16 @@
     <!-- Side Menu -->
     <div id="menu-overlay">
         <button id="close-menu" class="absolute top-8 right-8 text-2xl">×</button>
+
+        <!-- Mobile Navigation Links -->
+        <div class="flex flex-col gap-4 text-xl font-medium mb-6 md:hidden">
+            <a href="pricing.html">pricing</a>
+            <a href="science.html">science</a>
+            <a href="getstarted.html">get started</a>
+            <a href="continue.html">continue</a>
+        </div>
+        <div class="border-t border-gray-200 dark:border-gray-800 mb-6 md:hidden"></div>
+
         <h2 class="text-xl font-bold mb-6">settings</h2>
         <div class="flex flex-col gap-6">
             <div class="flex justify-between items-center">

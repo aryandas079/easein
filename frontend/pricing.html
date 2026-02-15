@@ -111,8 +111,10 @@
 
         .return-btn {
             position: fixed;
-            top: 2.5rem;
-            left: 2.5rem;
+            top: 1.5rem;
+            /* Mobile */
+            left: 1.5rem;
+            /* Mobile */
             z-index: 100;
             display: flex;
             align-items: center;
@@ -125,6 +127,13 @@
         .return-btn:hover {
             opacity: 1;
             transform: translateX(-4px);
+        }
+
+        @media (min-width: 768px) {
+            .return-btn {
+                top: 2.5rem;
+                left: 2.5rem;
+            }
         }
 
         /* Toggle styling */
@@ -242,7 +251,7 @@
 
     <main class="relative z-10 max-w-6xl mx-auto py-32 px-6 text-center">
         <p class="text-sm font-bold uppercase tracking-widest opacity-40 mb-3">Investment in your mind</p>
-        <h1 class="text-5xl md:text-6xl font-semibold tracking-tighter mb-6">pricing plans</h1>
+        <h1 class="text-3xl md:text-6xl font-semibold tracking-tighter mb-6">pricing plans</h1>
         <p class="max-w-xl mx-auto opacity-60 mb-12">Simple pricing for a simpler mind. No hidden clutter, just clarity.
         </p>
 
