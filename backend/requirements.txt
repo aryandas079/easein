@@ -8,4 +8,4 @@ openpyxl
 python-pptx
 Pillow
 werkzeug
-gpt4all
+

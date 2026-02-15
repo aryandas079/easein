@@ -6,7 +6,10 @@ from docx import Document
 from pptx import Presentation
 import openpyxl
 from PIL import Image
-import pytesseract
+try:
+    import pytesseract
+except ImportError:
+    pytesseract = None
 
 # Note: pytesseract requires Tesseract-OCR installed on the system.
 # For simplicity, if not installed, we might skip OCR or just use basic text extraction.
