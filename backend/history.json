@@ -1,6 +1,47 @@
 [
   {
     "tasks": [
+      "National Institute of Technology Silchar",
+      "Waves and oscillation",
+      "Q. 1: The Q value of an underdamped harmonic oscillator of frequency 480 Hz is 80000. Cal-",
+      "culate the time in which its amplitude reduces to 1/e of its initial value. How many oscillations",
+      "does it make in this time?",
+      "Q. 2: A 0.5 kg mass is attached to a spring of spring constant 150 N/m. A driving force",
+      "F (t) = 12 cos(\u03c9t ) N is applied to the mass, and the damping coe\ufb03cient \u03b3 is 6 Ns/m. What is",
+      "the amplitude of the steady-state motion if \u03c9 is equal to half of the natural frequency \u03c90 of the",
+      "system? Find the phase di\ufb00erence between the forced oscillation and the driving force.",
+      "Q. 3: Amplitude of a damped harmonic oscillator decreases by 5% during each oscillatory",
+      "cycle. Find the percentage of mechanical energy of the oscillator that is lost in each cycle.",
+      "Q. 4: Consider a damped harmonic oscillator of the form \u00a8x + 2 \u02d9x + 10x = 0. If x(0) = 4 and",
+      "\u02d9x(0) = \u22124, \ufb01nd the solution.",
+      "Q. 5: The equation of motion of a damped harmonic oscillator is of the form \u00a8x+ 2 \u02d9x+ 10x = 0.",
+      "Suggest and explain the nature of damping. Find the frequency of oscillation and the Q value",
+      "of the oscillator.",
+      "Q. 6: Consider a spring mass system with mass m = 2, spring constant k = 3, and damping",
+      "constantc = 1. Is this system underdamped, overdamped or critically damped?",
+      "Q. 7: The Q value of a spring loaded with 0 .3 kg is 60. It vibrates with a frequency of 2 Hz.",
+      "Calculate the force constant and mechanical resistance."
+    ],
+    "prompt": "1_tutorial_oscillation.pdf",
+    "timestamp": "2026-02-15T10:01:56.934Z"
+  },
+  {
+    "tasks": [
+      "Be able to design measuring instruments to measure electrical quantities with minimal error.",
+      "Be able to perform experiments and determine various types of errors during measurements, as",
+      "Be able to analyse industrial based components for their standardisation and health condition",
+      "Be able to design suitable DC and AC bridges for the measurement of resistance, inductance,",
+      "Be able to apply different industrial based measurement techniques and standards.",
+      "Electrical & Electronics Measurements and Instrumentation - A.K. Sawhney, Dhanpat Rai and Sons Publications.",
+      "Electrical Measurement and Measuring Instruments - Golding E. W. and F.C Widdis, Reem Publications Pvt. Ltd.",
+      "Electronic Instrumentation and Measurements - David A. Bell, Oxford University Press India.",
+      "Basic Electrical Measurements - Melville Bigham Stout, Literary Licensing, LLC."
+    ],
+    "prompt": "ELECTRICAL SYLLABUS.pdf",
+    "timestamp": "2026-02-15T10:01:32.039Z"
+  },
+  {
+    "tasks": [
       "Be able to design measuring instruments to measure electrical quantities with minimal error.",
       "Be able to perform experiments and determine various types of errors during measurements, as",
       "Be able to analyse industrial based components for their standardisation and health condition",
