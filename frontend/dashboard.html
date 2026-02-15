@@ -111,11 +111,18 @@
         }
 
         nav {
-            padding: 1.5rem 2.5rem;
+            padding: 1rem 1.5rem;
+            /* Mobile default */
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                padding: 1.5rem 2.5rem;
+            }
         }
 
         .nav-right {
@@ -150,7 +157,14 @@
             justify-content: flex-start;
             align-items: center;
             z-index: 10;
-            padding: 3rem 2rem;
+            padding: 1.5rem 1rem;
+            /* Mobile default */
+        }
+
+        @media (min-width: 768px) {
+            main {
+                padding: 3rem 2rem;
+            }
         }
 
         .welcome-text {
@@ -269,11 +283,17 @@
         /* Stats Section */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr;
             gap: 1.5rem;
             width: 100%;
             max-width: 720px;
             margin-top: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         .stat-card {
@@ -323,7 +343,8 @@
             position: fixed;
             top: 0;
             right: -100%;
-            width: 360px;
+            width: 100%;
+            max-width: 360px;
             height: 100vh;
             background: white;
             box-shadow: -20px 0 60px rgba(0, 0, 0, 0.05);

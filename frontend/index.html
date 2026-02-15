@@ -110,7 +110,7 @@
         }
 
         section {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -154,11 +154,18 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 2.5rem;
+            padding: 1rem 1.5rem;
+            /* Reduced for mobile */
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                padding: 1.5rem 2.5rem;
+            }
         }
 
         .logo {
@@ -218,7 +225,8 @@
             position: fixed;
             top: 0;
             right: -100%;
-            width: 320px;
+            width: 100%;
+            max-width: 320px;
             height: 100vh;
             background: var(--bg-color);
             box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
