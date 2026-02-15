@@ -26,7 +26,7 @@ const TaskEngine = {
         formData.append('instructions', "Break down into actionable steps.");
 
         try {
-            const response = await fetch('http://localhost:8000/api/generate-tasks', {
+            const response = await fetch('/api/generate-tasks', {
                 method: 'POST',
                 body: formData
             });

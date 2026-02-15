@@ -1,6 +1,112 @@
 [
   {
     "tasks": [
+      "Assignment \u2013 1",
+      "Computer Aided Drawing & Graphics (CE 12001)",
+      "Lettering and Geometric Construction",
+      "Answer all the following questions",
+      "Sl no Question",
+      "Q1. Write all the English alphabets in vertical uppercase and 12 mm height.",
+      "Q2. Write the numerals 0 to 9 in vertical and 12 mm height.",
+      "Q3. Draw different types of lines used in Engineering Drawing, describe them, and",
+      "write applications for each of them.",
+      "Q4. Draw a straight-line AB of any convenient length and divide this into 10 equal",
+      "Q5. Draw a straight-line AB of any convenient length and from a point C on AB",
+      "draw a perpendicular CD (use compass and scale only).",
+      "Q6. AB is a straight line of any convenient length. C is a point not lying on AB.",
+      "Draw a perpendicular CD from C on AB (use compass and scale).",
+      "Q7. Draw a straight-line AB of any convenient length and hence draw five lines",
+      "parallel to AB spaced at 10 mm apart from each other (use compass and scale",
+      "Q8. Draw a circle of 50 mm radius and divide its circumference into:",
+      "(i) 8 equal parts.",
+      "(ii) 12 equal parts.",
+      "Q9. Draw the following using compass, scale, and protractor:"
+    ],
+    "prompt": "make ten points there ",
+    "timestamp": "2026-02-15T13:09:08.443Z"
+  },
+  {
+    "tasks": [
+      "National Institute of Technology Silchar",
+      "Waves and oscillation",
+      "Q. 1: The Q value of an underdamped harmonic oscillator of frequency 480 Hz is 80000. Cal-",
+      "culate the time in which its amplitude reduces to 1/e of its initial value. How many oscillations",
+      "does it make in this time?",
+      "Q. 2: A 0.5 kg mass is attached to a spring of spring constant 150 N/m. A driving force",
+      "F (t) = 12 cos(\u03c9t ) N is applied to the mass, and the damping coe\ufb03cient \u03b3 is 6 Ns/m. What is",
+      "the amplitude of the steady-state motion if \u03c9 is equal to half of the natural frequency \u03c90 of the",
+      "system? Find the phase di\ufb00erence between the forced oscillation and the driving force.",
+      "Q. 3: Amplitude of a damped harmonic oscillator decreases by 5% during each oscillatory",
+      "cycle. Find the percentage of mechanical energy of the oscillator that is lost in each cycle.",
+      "Q. 4: Consider a damped harmonic oscillator of the form \u00a8x + 2 \u02d9x + 10x = 0. If x(0) = 4 and",
+      "\u02d9x(0) = \u22124, \ufb01nd the solution.",
+      "Q. 5: The equation of motion of a damped harmonic oscillator is of the form \u00a8x+ 2 \u02d9x+ 10x = 0.",
+      "Suggest and explain the nature of damping. Find the frequency of oscillation and the Q value",
+      "of the oscillator.",
+      "Q. 6: Consider a spring mass system with mass m = 2, spring constant k = 3, and damping",
+      "constantc = 1. Is this system underdamped, overdamped or critically damped?",
+      "Q. 7: The Q value of a spring loaded with 0 .3 kg is 60. It vibrates with a frequency of 2 Hz.",
+      "Calculate the force constant and mechanical resistance."
+    ],
+    "prompt": "make ten points there ",
+    "timestamp": "2026-02-15T13:08:06.582Z"
+  },
+  {
+    "tasks": [
+      "Error: Could not generate tasks. API Quota exceeded and offline parsing failed."
+    ],
+    "prompt": "make me 5 steps to complete this entire pdf all at once\n",
+    "timestamp": "2026-02-15T12:35:43.278Z"
+  },
+  {
+    "tasks": [
+      "Error: Could not generate tasks. API Quota exceeded and offline parsing failed."
+    ],
+    "prompt": "make me 5 steps to complete this entire pdf all at once\n",
+    "timestamp": "2026-02-15T12:35:41.844Z"
+  },
+  {
+    "tasks": [
+      "Error: Could not generate tasks. API Quota exceeded and offline parsing failed."
+    ],
+    "prompt": "make me 5 steps to complete this entire pdf all at once\n",
+    "timestamp": "2026-02-15T12:35:40.907Z"
+  },
+  {
+    "tasks": [
+      "Error: Could not generate tasks. API Quota exceeded and offline parsing failed."
+    ],
+    "prompt": "make me 5 steps to complete this entire pdf all at once\n",
+    "timestamp": "2026-02-15T12:35:35.954Z"
+  },
+  {
+    "tasks": [
+      "Waves and oscillation constitute one of the most important subjects of study in all",
+      "Most systems will vibrate freely in large variety of ways.",
+      "It is likely that small objects vibrate more rapidly and large objects slowly. A mosquito",
+      "All these phenomena has one thing in common, namely periodicity. The pattern of",
+      "The pattern can be complicated like a heartbeat or it can be simple like the nearly",
+      "Frictional forces paly a crucial role in the ideal oscillatory motion of a particle.",
+      "It tends to dampen the oscillatory behaviour of the system as the motion proceeds in",
+      "Oscillation decays gradually with time.",
+      "Case I",
+      "The frequency of the damped harmonic motion is less than the frequency of undamped",
+      "The amplitude A(t) = a0e\u2212\u03b2t is time dependent and decays exponentially with time",
+      "Case II",
+      "Case III",
+      "both the exponent in Eq. 40 are negative because \u03b4 <\u03b2. Hence both the solutions go",
+      "overdamped motion is non-oscillatory.",
+      "overdamped motion is supperposition of a quickly decaying term and a slowly decaying",
+      "The slowly decaying term controls the rate at which it reaches equilibrium.",
+      "Case I",
+      "Case II",
+      "Case III"
+    ],
+    "prompt": "Oscillation and Waves.pdf",
+    "timestamp": "2026-02-15T12:35:06.744Z"
+  },
+  {
+    "tasks": [
       "National Institute of Technology Silchar",
       "Waves and oscillation",
       "Q. 1: The Q value of an underdamped harmonic oscillator of frequency 480 Hz is 80000. Cal-",
