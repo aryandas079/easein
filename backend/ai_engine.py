@@ -56,8 +56,43 @@ def generate_offline_tasks(text):
             clean = s.strip()
             if 10 < len(clean) < 150: # Reasonable task length
                 tasks.append(clean)
+    
+    # Clean tasks
+    tasks = [clean_task_text(t) for t in tasks]
                 
     return tasks[:20]
+
+def clean_task_text(text):
+    """
+    Cleans task text:
+    1. Fixes "S P A C E D  T E X T" (common OCR issue)
+    2. Converts ALL CAPS to Sentence case
+    3. Removes mostly non-alphanumeric noise
+    """
+    import re
+    
+    # 1. Fix Spaced Text (e.g., "I N N O V A T E")
+    # Look for patterns where single chars are separated by spaces
+    # We'll use a simple heuristic: if > 50% of words are 1 letter, it's likely spaced text
+    words = text.split()
+    if len(words) > 3:
+        single_letter_words = [w for w in words if len(w) == 1 and w.isalpha()]
+        if len(single_letter_words) / len(words) > 0.5:
+            # It's likely spaced text. Join it.
+            # But wait, "A I" is valid. "I am a" is valid.
+            # Stricter: space between EVERY letter?
+            # Regex for "L E T T E R S"
+            if re.search(r'\b(?:[A-Z]\s){3,}[A-Z]\b', text):
+                # Replace matches
+                text = re.sub(r'\b((?:[A-Z]\s)+[A-Z])\b', lambda m: m.group(1).replace(' ', ''), text)
+
+    # 2. Fix All Caps
+    if text.isupper() and len(text) > 4:
+        text = text.capitalize()
+        
+    # 3. Basic cleanup
+    text = text.strip()
+    return text
 
 def generate_tasks(content_data, user_instructions=""):
     """
@@ -161,15 +196,9 @@ def generate_tasks(content_data, user_instructions=""):
                 return tasks
         
         # ── STRATEGY 3: LOCAL LLM (Slow Last Resort) ──
-        if fallback_content:
-            try:
-                print("Offline heuristic insufficient. Trying Local LLM...")
-                local_tasks = generate_local_tasks(fallback_content, user_instructions)
-                if local_tasks:
-                    return local_tasks
-            except Exception as le:
-                print(f"Local LLM failed: {le}")
-
+        # Removed generate_local_tasks as it was undefined and causing crashes.
+        # Fallback to a simple error message if offline heuristic also failed.
+        
         return [f"Error: Could not generate tasks. API Quota exceeded and offline parsing failed."]
 
 def generate_mindmap_code(tasks):
@@ -260,5 +289,5 @@ def parse_response(text):
             if len(cleaned_line) > 3:
                 tasks.append(cleaned_line)
                 
-        return tasks if tasks else ["Error: Could not parse tasks."]
+        return [clean_task_text(t) for t in tasks] if tasks else ["Error: Could not parse tasks."]
 

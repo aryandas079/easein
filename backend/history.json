@@ -23,6 +23,74 @@
       "Calculate the force constant and mechanical resistance."
     ],
     "prompt": "1_tutorial_oscillation.pdf",
+    "timestamp": "2026-02-15T12:01:16.119Z"
+  },
+  {
+    "tasks": [
+      "I N N O V A T E  W I T H  E X C E L L E N C E",
+      "1 .  S U B M I S S I O N  &  D E P L O Y M E N T",
+      "T i p :  T e s t  y o u r  b u i l d  l o c a l l y  b e f o r e  s u b m i t t i n g .",
+      "G i t H u b  R e p o s i t o r y :",
+      "M o d u l a r i t y :  C o d e  s h o u l d  b e  c l e a n ,  m o d u l a r ,  a n d  w e l l -",
+      "D o c k e r  c o n t a i n e r .",
+      "d u r i n g  t h e  s u b m i s s i o n  o r  e v a l u a t i o n  p h a s e .",
+      "G E N E R A L  I N S T R U C T I O N S",
+      "D I S C R E T I O N",
+      "I N N O V A T E  W I T H  E X C E L L E N C E",
+      "2 .  P R O B L E M  S T A T E M E N T S  &",
+      "C O N S T R A I N T S",
+      "3 .  C O D E  I N T E G R I T Y  &  O R I G I N A L I T Y",
+      "P r o b l e m  S t a t e m e n t s .",
+      "a n n o u n c e d .",
+      "r e s u l t  i n  a  p e n a l t y .",
+      "c o d e  f r o m  o t h e r  p a r t i c i p a n t s  o r  e x i s t i n g  p r o j e c t s .",
+      "t h e  P r o b l e m  S t a t e m e n t s  a r e  r e l e a s e d .",
+      "W e  w i l l  c h e c k  c o m m i t  t i m e s t a m p s .",
+      "t i m e  w i l l  b e  d i s q u a l i f i e d ."
+    ],
+    "prompt": "PS_neurathon2026.pdf",
+    "timestamp": "2026-02-15T11:26:27.406Z"
+  },
+  {
+    "tasks": [
+      "Restoring Force (Hooke\u2019s Law) \u2605\u2605\u2605\u2605\u2605",
+      "SHM Differential Equation \u2605\u2605\u2605v",
+      "Oscillations & Waves     by AryanDAS",
+      "PART A \u2013 SIMPLE HARMONIC MOTION (SHM) 2. Newton\u2019s Equation for Spring\u2013Mass System \u2605\u2605\u2605\u2605\u2605",
+      "1. Restoring Force (Hooke\u2019s Law) \u2605\u2605\u2605\u2605\u2605",
+      "3. SHM Differential Equation \u2605\u2605\u2605v",
+      "Advanced SHM Formulas",
+      "Advanced Damped Oscillator Formulas",
+      "Advanced Forced Oscillator",
+      "Advanced Coupled Oscillator Formulas"
+    ],
+    "prompt": "Physics Formulas.pdf",
+    "timestamp": "2026-02-15T10:46:03.765Z"
+  },
+  {
+    "tasks": [
+      "National Institute of Technology Silchar",
+      "Waves and oscillation",
+      "Q. 1: The Q value of an underdamped harmonic oscillator of frequency 480 Hz is 80000. Cal-",
+      "culate the time in which its amplitude reduces to 1/e of its initial value. How many oscillations",
+      "does it make in this time?",
+      "Q. 2: A 0.5 kg mass is attached to a spring of spring constant 150 N/m. A driving force",
+      "F (t) = 12 cos(\u03c9t ) N is applied to the mass, and the damping coe\ufb03cient \u03b3 is 6 Ns/m. What is",
+      "the amplitude of the steady-state motion if \u03c9 is equal to half of the natural frequency \u03c90 of the",
+      "system? Find the phase di\ufb00erence between the forced oscillation and the driving force.",
+      "Q. 3: Amplitude of a damped harmonic oscillator decreases by 5% during each oscillatory",
+      "cycle. Find the percentage of mechanical energy of the oscillator that is lost in each cycle.",
+      "Q. 4: Consider a damped harmonic oscillator of the form \u00a8x + 2 \u02d9x + 10x = 0. If x(0) = 4 and",
+      "\u02d9x(0) = \u22124, \ufb01nd the solution.",
+      "Q. 5: The equation of motion of a damped harmonic oscillator is of the form \u00a8x+ 2 \u02d9x+ 10x = 0.",
+      "Suggest and explain the nature of damping. Find the frequency of oscillation and the Q value",
+      "of the oscillator.",
+      "Q. 6: Consider a spring mass system with mass m = 2, spring constant k = 3, and damping",
+      "constantc = 1. Is this system underdamped, overdamped or critically damped?",
+      "Q. 7: The Q value of a spring loaded with 0 .3 kg is 60. It vibrates with a frequency of 2 Hz.",
+      "Calculate the force constant and mechanical resistance."
+    ],
+    "prompt": "1_tutorial_oscillation.pdf",
     "timestamp": "2026-02-15T10:01:56.934Z"
   },
   {

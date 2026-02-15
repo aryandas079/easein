@@ -8,4 +8,5 @@ openpyxl
 python-pptx
 Pillow
 werkzeug
-
+gunicorn
+requests
