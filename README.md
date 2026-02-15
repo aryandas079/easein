@@ -5,7 +5,7 @@
 > "The secret of getting ahead is getting started. The secret of getting started is breaking your complex tasks into small manageable tasks, and then starting on the first one." - *Mark Twain (with a productivity hack)*
 
 ---
-## Website live at https://https://easein.onrender.com
+## Website live at https://easein.onrender.com
 ## for mobile authentication use the test phone number +91 9435885077 OTP 885077
 
 ##  Table of Contents
