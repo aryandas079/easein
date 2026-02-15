@@ -184,26 +184,56 @@
         .input-card {
             width: 100%;
             max-width: 720px;
-            background: white;
-            border-radius: 2.5rem;
-            padding: 2.5rem;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.04);
-            margin-top: 2rem;
-            border: 1px solid rgba(0, 0, 0, 0.02);
+            /* Mobile: Transparent, no shadow, compact */
+            background: transparent;
+            padding: 0;
+            margin-top: 1rem;
         }
 
-        .dark-mode .input-card {
-            background: rgba(25, 25, 25, 0.9);
-            border-color: rgba(255, 255, 255, 0.05);
+        @media (min-width: 768px) {
+            .input-card {
+                background: white;
+                border-radius: 2.5rem;
+                padding: 2.5rem;
+                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.04);
+                margin-top: 2rem;
+                border: 1px solid rgba(0, 0, 0, 0.02);
+            }
+
+            .dark-mode .input-card {
+                background: rgba(25, 25, 25, 0.9);
+                border-color: rgba(255, 255, 255, 0.05);
+            }
         }
 
         .task-input-container {
             border-radius: 1.5rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            background: rgba(240, 240, 240, 0.3);
+            padding: 1.2rem;
+            margin-bottom: 0;
+            /* Mobile: White card look */
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(0, 0, 0, 0.03);
             position: relative;
+        }
+
+        .dark-mode .task-input-container {
+            background: #1e1e1e;
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        @media (min-width: 768px) {
+            .task-input-container {
+                /* Desktop: Gray background, no shadow */
+                background: rgba(240, 240, 240, 0.3);
+                box-shadow: none;
+                margin-bottom: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .dark-mode .task-input-container {
+                background: rgba(255, 255, 255, 0.03);
+            }
         }
 
         .task-input {
@@ -561,15 +591,53 @@
         </div>
 
         <!-- Task Input Section -->
-        <div class="input-card">
-            <h3 class="font-bold text-lg mb-5">What's on your mind?</h3>
+        <div class="input-card group">
+            <h3 class="font-bold text-lg mb-5 hidden md:block">What's on your mind?</h3>
 
-            <div class="task-input-container">
-                <textarea class="task-input" id="task-text-input"
-                    placeholder="Enter a project description, or upload a file..." rows="2"></textarea>
+            <!-- Main Input Container: White box on mobile, Gray box on Desktop -->
+            <div class="task-input-container transition-all duration-300">
+                <textarea class="task-input" id="task-text-input" placeholder="Enter a project description..."
+                    rows="2"></textarea>
+
+                <!-- Mobile Actions Toolbar (Inside the box) -->
+                <div class="flex items-center justify-between mt-3 md:hidden">
+                    <div class="flex items-center gap-2">
+                        <button
+                            class="p-2 text-gray-400 hover:text-blue-500 transition-colors rounded-full hover:bg-blue-50 dark:hover:bg-white/5"
+                            onclick="document.getElementById('task-file-input').click()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </button>
+                        <button
+                            class="p-2 text-gray-400 hover:text-blue-500 transition-colors rounded-full hover:bg-blue-50 dark:hover:bg-white/5"
+                            id="mobile-mic-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                <line x1="12" y1="19" x2="12" y2="23"></line>
+                                <line x1="8" y1="23" x2="16" y2="23"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button id="mobile-send-btn"
+                        class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="flex items-center gap-4 mt-4">
+            <!-- Desktop Buttons (Hidden on Mobile) -->
+            <div class="hidden md:flex items-center gap-4 mt-4">
                 <button class="atomize-btn" id="generate-btn">
                     <span id="btn-text">Break It Down</span>
                     <span id="task-loader" class="hidden ml-2 animate-spin">⚪</span>
@@ -594,27 +662,57 @@
                         <line x1="12" y1="3" x2="12" y2="15" />
                     </svg>
                 </button>
-                <input type="file" id="task-file-input" class="hidden"
-                    accept=".pdf,.docx,.pptx,.xlsx,.txt,.md,.png,.jpg,.jpeg">
             </div>
 
-            <div class="drop-zone mt-4 transition-all" id="drop-zone">
+            <input type="file" id="task-file-input" class="hidden"
+                accept=".pdf,.docx,.pptx,.xlsx,.txt,.md,.png,.jpg,.jpeg">
+
+            <div class="drop-zone mt-4 transition-all hidden md:flex" id="drop-zone">
                 <p class="text-sm font-bold opacity-70" id="file-name-display">Drag & drop files here</p>
                 <p class="text-[10px] opacity-40 uppercase tracking-widest font-bold">PDF, DOCX, IMG, PPTX</p>
             </div>
+            <!-- Mobile File Name Display -->
+            <p class="md:hidden text-xs text-center mt-2 opacity-60 truncate px-4" id="mobile-file-name"></p>
 
             <!-- Scripts for File Handling UI -->
             <script>
                 const fileInput = document.getElementById('task-file-input');
                 const dropZone = document.getElementById('drop-zone');
                 const nameDisplay = document.getElementById('file-name-display');
+                const mobileNameDisplay = document.getElementById('mobile-file-name');
 
                 fileInput.addEventListener('change', (e) => {
                     if (e.target.files.length > 0) {
-                        nameDisplay.textContent = e.target.files[0].name;
+                        const name = e.target.files[0].name;
+                        nameDisplay.textContent = name;
+                        mobileNameDisplay.textContent = "Attached: " + name;
                         dropZone.classList.add('bg-blue-500/10', 'border-blue-500');
                     }
                 });
+
+                // Link Mobile Send Button to Generate Button
+                const mobileSendBtn = document.getElementById('mobile-send-btn');
+                const generateBtn = document.getElementById('generate-btn');
+
+                if (mobileSendBtn && generateBtn) {
+                    mobileSendBtn.addEventListener('click', () => {
+                        // Add loading state to mobile button
+                        mobileSendBtn.innerHTML = '<span class="animate-spin">⚪</span>';
+                        generateBtn.click();
+
+                        // Reset after short delay (or handle via event listener if possible, but simple timeout works for UI feedback)
+                        setTimeout(() => {
+                            mobileSendBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
+                        }, 3000);
+                    });
+                }
+
+                // Link Mobile Mic Button
+                const mobileMicBtn = document.getElementById('mobile-mic-btn');
+                const micBtn = document.getElementById('mic-btn');
+                if (mobileMicBtn && micBtn) {
+                    mobileMicBtn.addEventListener('click', () => micBtn.click());
+                }
             </script>
         </div>
 
