@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | easein</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%234d79ff%22 opacity=%220.2%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22 fill=%22%234d79ff%22 font-family=%22sans-serif%22 font-weight=%22bold%22>e</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap');
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-blue: #4d79ff;
+            --accent-red: #ff4d4d;
+        }
+
+        .dark-mode {
+            --bg-color: #0f0f0f;
+            --text-color: #f5f5f5;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            cursor: none !important;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor - Stays a dot even on buttons */
+        #cursor {
+            width: 14px;
+            height: 14px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        a,
+        button,
+        [role="button"],
+        label {
+            cursor: none !important;
+        }
+
+        /* Grainy Background */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .gradient-sphere {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(255, 77, 77, 0.08) 0%, rgba(77, 121, 255, 0.08) 50%, transparent 70%);
+            filter: blur(100px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 2.5rem;
+            padding: 4rem 3rem;
+            text-align: left;
+        }
+
+        .dark-mode .content-card {
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .return-btn {
+            position: fixed;
+            top: 2.5rem;
+            left: 2.5rem;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            opacity: 0.6;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .return-btn:hover {
+            opacity: 1;
+            transform: translateX(-4px);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 600;
+            letter-spacing: -0.06em;
+            margin-bottom: 2rem;
+            line-height: 1;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-top: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-blue);
+        }
+
+        p {
+            margin-bottom: 2rem;
+            opacity: 0.75;
+            font-size: 1.1rem;
+            max-width: 700px;
+        }
+
+        .story-highlight {
+            font-size: 1.5rem;
+            font-weight: 300;
+            font-style: italic;
+            border-left: 3px solid var(--accent-red);
+            padding-left: 2rem;
+            margin: 3rem 0;
+            opacity: 0.9;
+        }
+
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .vision-item {
+            padding: 2rem;
+            border-radius: 1.5rem;
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .dark-mode .vision-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+
+<body id="app-body">
+    <div id="cursor"></div>
+    <div class="grain-overlay"></div>
+    <div class="gradient-sphere"></div>
+
+    <a href="index.html" class="return-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6" />
+        </svg>
+        return
+    </a>
+
+    <main class="relative z-10 max-w-4xl mx-auto py-32 px-6">
+        <div class="content-card">
+            <p class="text-sm font-bold uppercase tracking-widest opacity-40 mb-3 text-center">the heart of easein</p>
+            <h1 class="text-center">Our Story</h1>
+
+            <div class="story-highlight">
+                "We didn't build easein to change how you work. We built it to respect how your brain already works."
+            </div>
+
+            <section>
+                <h2>The Spark</h2>
+                <p>It began with a realization: the world is designed for neurotypical linear thinking. For those of us
+                    with ADHD and Dyslexia, a standard to-do list isn't just a list—it's a source of anxiety. The
+                    cluttered interfaces, the aggressive notifications, and the sheer density of information felt like
+                    fighting a losing battle every single morning.</p>
+                <p>We saw friends, family, and brilliant creative minds feeling "behind" simply because the tools they
+                    were using weren't built for their cognitive architecture. We decided it was time to build a
+                    sanctuary.</p>
+            </section>
+
+            <section>
+                <h2>Building for Neurodiversity</h2>
+                <p>Most productivity apps focus on "adding." More features, more integrations, more complexity. We
+                    decided to focus on "subtracting." By removing visual noise and breaking down the "Wall of Awful,"
+                    we created a space where focus isn't forced—it's invited.</p>
+                <p>Every design choice, from the specific weights of our <strong>Lexend typography</strong> to the soft,
+                    grainy gradients of our interface, was chosen to soothe the sensory systems of our users. We
+                    atomized the experience so you can atomize your life.</p>
+            </section>
+
+            <div class="vision-grid">
+                <div class="vision-item">
+                    <h3 class="font-bold mb-2">Clarity</h3>
+                    <p class="text-sm opacity-60 mb-0">Eliminating the overwhelm by presenting only what matters most
+                        right now.</p>
+                </div>
+                <div class="vision-item">
+                    <h3 class="font-bold mb-2">Kindness</h3>
+                    <p class="text-sm opacity-60 mb-0">Designing with empathy for the unique struggles of executive
+                        dysfunction.</p>
+                </div>
+                <div class="vision-item">
+                    <h3 class="font-bold mb-2">Inclusion</h3>
+                    <p class="text-sm opacity-60 mb-0">Ensuring that brilliant minds aren't sidelined by poor interface
+                        design.</p>
+                </div>
+            </div>
+
+            <section>
+                <h2>The Future</h2>
+                <p>Our journey is just beginning. As we look toward 2026 and beyond, easein continues to evolve through
+                    the feedback of the community. We are more than a tool; we are a movement toward a more inclusive,
+                    calmer digital future.</p>
+                <p>Thank you for being part of our story.</p>
+            </section>
+
+            <div class="mt-20 pt-10 border-t border-black/5 dark:border-white/5 opacity-40 text-sm text-center">
+                © 2026 easein. Proudly built for the neurodiverse community.
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.7)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.5)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+    </script>
+    <script src="theme.js"></script>
+</body>
+
+</html>

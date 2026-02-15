@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>easein</title>
+    <!-- Custom Favicon: A stylized 'e' representing focus -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%234d79ff%22 opacity=%220.2%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22 fill=%22%234d79ff%22 font-family=%22sans-serif%22 font-weight=%22bold%22>e</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Redirect if already logged in
+        if (localStorage.getItem('easein-logged-in') === 'true') {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap');
+
+        /* Accessibility: Dyslexia Friendly Font Styles */
+        .dyslexia-font {
+            font-family: 'Lexend', sans-serif !important;
+            letter-spacing: 0.15ch !important;
+            word-spacing: 0.3ch !important;
+            line-height: 1.6 !important;
+        }
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-red: #ff4d4d;
+            --accent-blue: #4d79ff;
+        }
+
+        .dark-mode {
+            --bg-color: #0f0f0f;
+            --text-color: #f5f5f5;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+            cursor: none !important;
+        }
+
+        /* Force custom cursor everywhere, even on buttons */
+        * {
+            cursor: none !important;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            width: 14px;
+            height: 14px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Grainy Background Effect */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .gradient-sphere {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(255, 77, 77, 0.12) 0%, rgba(77, 121, 255, 0.12) 50%, transparent 70%);
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .scroll-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            will-change: scroll-position;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Fluid Sliding Text Animation */
+        .typing-container {
+            display: inline-flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 1.2em;
+            line-height: 1.2em;
+            vertical-align: middle;
+        }
+
+        .slide-track {
+            display: flex;
+            flex-direction: column;
+            transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .slide-word {
+            height: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease;
+            white-space: nowrap;
+        }
+
+        .highlight-blue {
+            color: var(--accent-blue);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-right-cluster {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
+        }
+
+        /* Buttons */
+        .btn-outline {
+            border: 1px solid var(--text-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-outline:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .btn-primary {
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hamburger Menu */
+        #menu-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            height: 100vh;
+            background: var(--bg-color);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+            z-index: 200;
+            transition: right 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        #menu-overlay.active {
+            right: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 6rem 2.5rem 4rem;
+        }
+
+        .footer-bottom {
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        .easein-logo-huge {
+            font-size: 18vw;
+            font-weight: 600;
+            line-height: 0.8;
+            letter-spacing: -0.06em;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Toggle Switches */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 22px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ddd;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--accent-blue);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(22px);
+        }
+
+        /* Fade Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile optimization for headline */
+        @media (max-width: 768px) {
+            .headline-wrap {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body id="app-body">
+    <div id="cursor"></div>
+    <div class="grain-overlay"></div>
+    <div class="gradient-sphere"></div>
+
+    <nav>
+        <div class="logo">easein</div>
+        <div class="nav-right-cluster">
+            <a href="pricing.html" class="nav-link">pricing</a>
+            <a href="science.html" class="nav-link">science & methodology</a>
+            <a href="continue.html" class="btn-outline">continue</a>
+            <a href="getstarted.html" class="btn-primary">get started</a>
+            <button id="menu-btn" class="p-2 space-y-1.5 focus:outline-none ml-2">
+                <div class="w-6 h-0.5 bg-current"></div>
+                <div class="w-4 h-0.5 bg-current ml-auto"></div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Side Menu -->
+    <div id="menu-overlay">
+        <button id="close-menu" class="absolute top-8 right-8 text-2xl">×</button>
+        <h2 class="text-xl font-bold mb-6">settings</h2>
+        <div class="flex flex-col gap-6">
+            <div class="flex justify-between items-center">
+                <span>dark mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="flex justify-between items-center">
+                <span>dyslexia font</span>
+                <label class="switch">
+                    <input type="checkbox" id="dyslexia-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="mt-auto flex flex-col gap-4 text-sm opacity-60">
+            <a href="support.html">help center</a>
+            <a href="about.html">our story</a>
+            <a href="privacy.html">privacy</a>
+        </div>
+    </div>
+
+    <div class="scroll-container" id="main-scroll">
+        <!-- Hero Section -->
+        <section>
+            <div class="max-w-6xl mx-auto flex flex-col items-center">
+                <!-- Headline centered in a single line -->
+                <div
+                    class="flex flex-row items-center justify-center gap-x-2 text-4xl md:text-6xl font-semibold tracking-tight headline-wrap">
+                    <span class="opacity-80 whitespace-nowrap">complex tasks made</span>
+                    <div class="typing-container">
+                        <div class="slide-track" id="slide-track">
+                            <div class="slide-word highlight-blue">simple.</div>
+                            <div class="slide-word highlight-blue">clear.</div>
+                            <div class="slide-word highlight-blue">calm.</div>
+                            <div class="slide-word highlight-blue">easy.</div>
+                            <div class="slide-word highlight-blue">steady.</div>
+                            <div class="slide-word highlight-blue">bright.</div>
+                            <div class="slide-word highlight-blue">focused.</div>
+                            <div class="slide-word highlight-blue">light.</div>
+                            <div class="slide-word highlight-blue">peaceful.</div>
+                            <div class="slide-word highlight-blue">achievable.</div>
+                            <!-- Loop word -->
+                            <div class="slide-word highlight-blue">simple.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Description removed as per previous turn -->
+                <div class="mt-12 flex gap-2 animate-bounce opacity-30">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Philosophy -->
+        <section class="bg-opacity-20">
+            <div class="grid md:grid-cols-2 gap-8 items-center max-w-5xl px-6">
+                <div
+                    class="reveal text-left p-10 rounded-[2.5rem] bg-blue-500/5 border border-blue-200/20 backdrop-blur-xl">
+                    <h3 class="text-4xl font-bold mb-6 highlight-blue">atomize</h3>
+                    <p class="text-lg opacity-70 leading-relaxed">Most tools assume you know where to start. We don't.
+                        We take your big goals and slice them until they are small enough to feel safe.</p>
+                </div>
+                <div
+                    class="reveal text-left p-10 rounded-[2.5rem] bg-red-500/5 border border-red-200/20 backdrop-blur-xl">
+                    <h3 class="text-4xl font-bold mb-6 highlight-red">stabilize</h3>
+                    <p class="text-lg opacity-70 leading-relaxed">Visual noise causes cognitive friction. Easein removes
+                        everything but the next step, letting your focus rest on one thing at a time.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section>
+            <div class="max-w-3xl px-6 reveal">
+                <div class="text-6xl mb-8 opacity-20">“</div>
+                <h3 class="text-3xl font-light italic leading-snug">"Finally, a space that doesn't yell at me with red
+                    notifications and cluttered sidebars. It's like a deep breath for my workflow."</h3>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="easein-logo-huge">easein</div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-left">
+                <div class="col-span-2">
+                    <h4 class="text-xl font-bold mb-4">the focus initiative</h4>
+                    <p class="opacity-60 max-w-xs">Building software that understands neurodiversity as a strength, not
+                        a deficit.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">explore</h4>
+                    <ul class="space-y-3 opacity-60 text-sm">
+                        <li><a href="methodology.html">methodology</a></li>
+                        <li><a href="pricing.html">pricing</a></li>
+                        <li><a href="careers.html">careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">legal</h4>
+                    <ul class="space-y-3 opacity-60 text-sm">
+                        <li><a href="privacy.html">privacy policy</a></li>
+                        <li><a href="terms.html">terms & conditions</a></li>
+                        <li><a href="accessibility.html">accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 ease in. Designed for neurodiversity.</p>
+            </div>
+        </footer>
+    </div>
+
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-[9998]"></canvas>
+
+    <script>
+        // ── Particle Cursor System ──
+        (function () {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            const particles = [];
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Particle {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.size = Math.random() * 15 + 5; // 5-20px (Bigger)
+                    this.speedX = Math.random() * 2 - 1;
+                    this.speedY = Math.random() * 2 - 1;
+                    this.life = 1.0; // Opacity
+                    this.decay = Math.random() * 0.02 + 0.005; // Slower fade
+                    this.color = Math.random() > 0.5 ? '#4d79ff' : '#ff4d4d'; // Brand colors
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.size *= 0.95; // Shrink
+                    this.life -= this.decay;
+                }
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.globalAlpha = this.life;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function handleParticles() {
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                    if (particles[i].life <= 0 || particles[i].size <= 0.1) {
+                        particles.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                handleParticles();
+                requestAnimationFrame(animate);
+            }
+            animate();
+
+            // Spawn on move
+            document.addEventListener('mousemove', (e) => {
+                // Spawn 2 particles per frame
+                for (let i = 0; i < 2; i++) {
+                    particles.push(new Particle(e.clientX, e.clientY));
+                }
+            });
+        })();
+    </script>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.7)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+
+        // Ensure buttons and links keep the custom cursor
+        document.querySelectorAll('a, button, .switch').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.5)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+
+        // Fluid Slide Animation
+        const slideTrack = document.getElementById('slide-track');
+        let currentSlide = 0;
+        const totalSlides = 10;
+
+        function nextSlide() {
+            currentSlide++;
+            slideTrack.style.transform = `translateY(-${currentSlide * 1.2}em)`;
+
+            if (currentSlide === totalSlides) {
+                setTimeout(() => {
+                    slideTrack.style.transition = 'none';
+                    currentSlide = 0;
+                    slideTrack.style.transform = `translateY(0)`;
+                    slideTrack.offsetHeight; // Force reflow
+                    setTimeout(() => {
+                        slideTrack.style.transition = 'transform 1.2s cubic-bezier(0.65, 0, 0.35, 1)';
+                    }, 50);
+                }, 1200);
+            }
+        }
+
+        setInterval(nextSlide, 3500);
+
+        // Intersection Observer for reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Menu Functionality
+        const menuBtn = document.getElementById('menu-btn');
+        const closeMenu = document.getElementById('close-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        menuBtn.addEventListener('click', () => menuOverlay.classList.add('active'));
+        closeMenu.addEventListener('click', () => menuOverlay.classList.remove('active'));
+
+        // Theme & Font Toggles (handled by shared theme.js)
+
+        // ── Buttery Smooth Scroll Engine ──
+        (function () {
+            const scrollContainer = document.getElementById('main-scroll');
+            if (!scrollContainer) return;
+
+            let currentScroll = 0;   // where the scroll currently is (animated)
+            let targetScroll = 0;    // where the scroll should go
+            let rafId = null;
+            const ease = 0.08;       // lerp factor — lower = smoother & floatier
+            const multiplier = 1.2;  // amplify wheel delta for responsiveness
+
+            // Sync internal state with actual scroll on load
+            currentScroll = scrollContainer.scrollTop;
+            targetScroll = currentScroll;
+
+            // Intercept wheel events for custom momentum
+            scrollContainer.addEventListener('wheel', function (e) {
+                e.preventDefault();
+                const delta = e.deltaY * multiplier;
+                targetScroll += delta;
+
+                // Clamp to scroll bounds
+                const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+                targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+
+                if (!rafId) {
+                    rafId = requestAnimationFrame(smoothScroll);
+                }
+            }, { passive: false });
+
+            function smoothScroll() {
+                // Lerp: ease current toward target
+                currentScroll += (targetScroll - currentScroll) * ease;
+
+                // Snap when close enough to avoid infinite micro-updates
+                if (Math.abs(targetScroll - currentScroll) < 0.5) {
+                    currentScroll = targetScroll;
+                    scrollContainer.scrollTop = currentScroll;
+                    rafId = null;
+                    return;
+                }
+
+                scrollContainer.scrollTop = currentScroll;
+                rafId = requestAnimationFrame(smoothScroll);
+            }
+
+            // Keep internal state synced if user scrolls via other means (touch, keys)
+            scrollContainer.addEventListener('scroll', function () {
+                if (!rafId) {
+                    currentScroll = scrollContainer.scrollTop;
+                    targetScroll = currentScroll;
+                }
+            });
+
+            // Recalculate on resize
+            window.addEventListener('resize', function () {
+                const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+                targetScroll = Math.min(targetScroll, maxScroll);
+                currentScroll = Math.min(currentScroll, maxScroll);
+            });
+        })();
+    </script>
+    <script src="theme.js"></script>
+</body>
+
+</html>

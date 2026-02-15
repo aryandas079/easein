@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History | easein</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%234d79ff%22 opacity=%220.2%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22 fill=%22%234d79ff%22 font-family=%22sans-serif%22 font-weight=%22bold%22>e</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0f0f0f',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap');
+
+        .dyslexia-font {
+            font-family: 'Lexend', sans-serif !important;
+            letter-spacing: 0.15ch !important;
+            word-spacing: 0.3ch !important;
+            line-height: 1.6 !important;
+        }
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-blue: #4d79ff;
+            --accent-red: #ff4d4d;
+        }
+
+        .dark-mode {
+            --bg-color: #0f0f0f;
+            --text-color: #f5f5f5;
+        }
+
+        * {
+            cursor: none !important;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body id="app-body">
+    <nav class="p-8 flex justify-between items-center z-50">
+        <a href="dashboard.html"
+            class="font-bold text-xl tracking-tighter hover:opacity-70 transition-opacity">easein</a>
+        <div class="flex items-center gap-4">
+            <div
+                class="flex items-center gap-2 bg-white dark:bg-white/5 px-3 py-1.5 rounded-full border border-black/5 shadow-sm text-sm font-bold">
+                <span class="text-orange-500">🔥 <span class="user-streak-display">0</span></span>
+                <span class="text-gray-300">|</span>
+                <span class="text-blue-500">Lvl <span class="user-level-display">1</span></span>
+                <span class="text-gray-300">|</span>
+                <span class="text-teal-500"><span class="user-xp-display">0</span> XP</span>
+            </div>
+            <div class="w-8 h-8 rounded-full overflow-hidden bg-gray-100">
+                <img class="user-avatar-img w-full h-full object-cover" src="https://ui-avatars.com/api/?name=User"
+                    alt="User" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=User'">
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 flex flex-col items-center p-8 w-full max-w-2xl mx-auto">
+        <div class="flex justify-between items-center w-full mb-8">
+            <h1 class="text-3xl font-bold">Atomization History</h1>
+            <button id="clear-history-btn"
+                class="text-sm text-red-400 hover:text-red-500 font-bold tracking-wide uppercase transition-colors px-4 py-2 border border-red-400/20 rounded-lg hover:bg-red-500/10">Clear
+                Logs</button>
+        </div>
+
+        <div id="history-list" class="w-full flex flex-col gap-3">
+            <!-- History items injected here -->
+        </div>
+
+        <a href="dashboard.html"
+            class="mt-12 opacity-50 hover:opacity-100 transition-opacity text-sm font-bold uppercase tracking-widest">←
+            Back to Dashboard</a>
+    </main>
+
+    <script src="gamification.js"></script>
+    <script src="theme.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load User Avatar
+            const userData = JSON.parse(localStorage.getItem('easein-user') || 'null');
+            const avatarEls = document.querySelectorAll('.user-avatar-img');
+            if (userData && avatarEls.length > 0) {
+                const photoUrl = userData.picture || userData.photoURL;
+                if (photoUrl) avatarEls.forEach(img => img.src = photoUrl);
+            }
+
+            // Fetch History from Backend
+            fetch('/api/history')
+                .then(res => res.json())
+                .then(history => {
+                    const list = document.getElementById('history-list');
+                    list.innerHTML = '';
+
+                    if (history.length === 0) {
+                        list.innerHTML = '<p class="opacity-50 text-center py-10">No history yet.</p>';
+                    } else {
+                        history.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'flex flex-col bg-white dark:bg-zinc-800/40 p-5 rounded-xl border border-gray-100 dark:border-white/5 shadow-sm';
+
+                            const date = new Date(item.timestamp).toLocaleString();
+                            const taskCount = item.tasks ? item.tasks.length : 0;
+                            const promptShort = item.prompt.length > 50 ? item.prompt.substring(0, 50) + '...' : item.prompt;
+
+                            div.innerHTML = `
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="font-bold text-lg">${promptShort}</h3>
+                                        <span class="opacity-40 text-xs whitespace-nowrap bg-gray-100 dark:bg-white/10 px-2 py-1 rounded">${date}</span>
+                                    </div>
+                                    <p class="text-sm opacity-60 mb-3">${taskCount} generated steps</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${(item.tasks || []).slice(0, 3).map(t => `<span class="text-xs border border-current opacity-50 px-2 py-1 rounded-full truncate max-w-[200px] block">${t}</span>`).join('')}
+                                        ${taskCount > 3 ? `<span class="text-xs opacity-50 px-2 py-1">+${taskCount - 3} more</span>` : ''}
+                                    </div>
+                                `;
+                            list.appendChild(div);
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('history-list').innerHTML = '<p class="text-red-500 text-center">Failed to load history.</p>';
+                });
+
+            // Clear History Logic
+            document.getElementById('clear-history-btn').addEventListener('click', async () => {
+                if (confirm("Are you sure you want to clear all history?")) {
+                    await fetch('/api/clear-history', { method: 'POST' });
+                    location.reload();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

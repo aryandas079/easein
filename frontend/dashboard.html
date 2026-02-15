@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | easein</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%234d79ff%22 opacity=%220.2%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22 fill=%22%234d79ff%22 font-family=%22sans-serif%22 font-weight=%22bold%22>e</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0f0f0f',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap');
+
+        /* Accessibility: Dyslexia Friendly Font Styles */
+        .dyslexia-font {
+            font-family: 'Lexend', sans-serif !important;
+            letter-spacing: 0.15ch !important;
+            word-spacing: 0.3ch !important;
+            line-height: 1.6 !important;
+        }
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-blue: #4d79ff;
+            --accent-red: #ff4d4d;
+        }
+
+        .dark-mode {
+            --bg-color: #0f0f0f;
+            --text-color: #f5f5f5;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            cursor: none !important;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        * {
+            cursor: none !important;
+        }
+
+        #cursor {
+            width: 14px;
+            height: 14px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        a,
+        button,
+        label,
+        textarea,
+        input,
+        .switch {
+            cursor: none !important;
+        }
+
+        /* Grainy Background Effect (Reverting to earlier style) */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .gradient-sphere {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw;
+            height: 90vw;
+            background: radial-gradient(circle, rgba(255, 77, 77, 0.12) 0%, rgba(77, 121, 255, 0.08) 50%, transparent 70%);
+            filter: blur(120px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        nav {
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .user-pill {
+            background: white;
+            padding: 0.4rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .dark-mode .user-pill {
+            background: #222;
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Dashboard Header */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 10;
+            padding: 3rem 2rem;
+        }
+
+        .welcome-text {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .accent-name {
+            color: var(--accent-red);
+        }
+
+        /* Input Card Styling */
+        .input-card {
+            width: 100%;
+            max-width: 720px;
+            background: white;
+            border-radius: 2.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.04);
+            margin-top: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        .dark-mode .input-card {
+            background: rgba(25, 25, 25, 0.9);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .task-input-container {
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: rgba(240, 240, 240, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            position: relative;
+        }
+
+        .task-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            font-size: 1.15rem;
+            outline: none;
+            resize: none;
+            color: inherit;
+        }
+
+        .input-dot {
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            /* Teal dot from screenshot */
+            border-radius: 50%;
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+        }
+
+        .atomize-btn {
+            background: var(--accent-red);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            flex: 1;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .atomize-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .action-icon-btn {
+            background: var(--accent-blue);
+            color: white;
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .action-icon-btn.secondary {
+            background: #f0f4ff;
+            color: var(--accent-blue);
+        }
+
+        .dark-mode .action-icon-btn.secondary {
+            background: #1e293b;
+            color: #60a5fa;
+        }
+
+        .drop-zone {
+            border: 1px dashed rgba(0, 0, 0, 0.1);
+            border-radius: 1.2rem;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            margin-top: 1.5rem;
+        }
+
+        .dark-mode .drop-zone {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 720px;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2.5rem 1.5rem;
+            border-radius: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.01);
+        }
+
+        .dark-mode .stat-card {
+            background: rgba(25, 25, 25, 0.9);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.5;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hamburger Menu Side Panel (Matching image_8fa838.png) */
+        #menu-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 360px;
+            height: 100vh;
+            background: white;
+            box-shadow: -20px 0 60px rgba(0, 0, 0, 0.05);
+            z-index: 200;
+            transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 3.5rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dark-mode #menu-overlay {
+            background: #0f0f0f;
+        }
+
+        #menu-overlay.active {
+            right: 0;
+        }
+
+        .menu-header {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            color: inherit;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .menu-item:hover {
+            opacity: 1;
+        }
+
+        .menu-item svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .menu-section-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.4;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Toggles in Menu */
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e5e7eb;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--accent-blue);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+    </style>
+</head>
+
+<body id="app-body">
+    <div id="cursor"></div>
+    <div class="grain-overlay"></div>
+    <div class="gradient-sphere"></div>
+
+    <nav>
+        <div class="logo font-bold text-xl tracking-tighter">easein</div>
+        <div class="nav-right">
+            <div
+                class="flex items-center gap-2 bg-white dark:bg-white/5 px-3 py-1.5 rounded-full border border-black/5 shadow-sm text-sm font-bold mr-2">
+                <span class="text-orange-500">🔥 <span class="user-streak-display">0</span></span>
+                <span class="text-gray-300">|</span>
+                <span class="text-blue-500">Lvl <span class="user-level-display">1</span></span>
+                <span class="text-gray-300">|</span>
+                <span class="text-teal-500"><span class="user-xp-display">0</span> XP</span>
+            </div>
+
+            <div class="user-pill hidden sm:flex">
+                <div
+                    class="w-7 h-7 bg-red-100 rounded-full flex items-center justify-center text-[11px] text-red-500 overflow-hidden">
+                    <img id="user-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aryan" alt="User">
+                </div>
+            </div>
+            <button id="menu-btn" class="p-2 opacity-50 hover:opacity-100 transition-opacity">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dashboard Menu Sidebar (Matching image_8fa838.png) -->
+    <div id="menu-overlay">
+        <div class="menu-header">
+            dashboard menu
+            <button id="close-menu" class="p-2 opacity-60 hover:opacity-100 transition-opacity">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex flex-col">
+            <a href="analytics.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+                analytics
+            </a>
+            <a href="history.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                atomization history
+            </a>
+        </div>
+
+        <div class="border-b border-gray-100 dark:border-gray-800 my-4"></div>
+
+        <div class="menu-section-title">preferences</div>
+
+        <div class="toggle-row">
+            <span>dark mode</span>
+            <label class="switch">
+                <input type="checkbox" id="dark-mode-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-row">
+            <span>dyslexia font</span>
+            <label class="switch">
+                <input type="checkbox" id="dyslexia-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="mt-auto pt-8 flex flex-col gap-4 text-sm opacity-40 font-medium">
+            <a href="index.html">return to home</a>
+            <a href="#" id="sign-out-btn">sign out</a>
+        </div>
+    </div>
+
+    <main>
+        <div class="text-center">
+            <h1 class="welcome-text">Welcome back, <span class="accent-name" id="user-display-name">there</span>!</h1>
+            <p class="opacity-50 text-sm font-medium">Break down your tasks into micro-wins</p>
+        </div>
+
+        <!-- Task Input Section -->
+        <div class="input-card">
+            <h3 class="font-bold text-lg mb-5">What's on your mind?</h3>
+
+            <div class="task-input-container">
+                <textarea class="task-input" id="task-text-input"
+                    placeholder="Enter a project description, or upload a file..." rows="2"></textarea>
+            </div>
+
+            <div class="flex items-center gap-4 mt-4">
+                <button class="atomize-btn" id="generate-btn">
+                    <span id="btn-text">Break It Down</span>
+                    <span id="task-loader" class="hidden ml-2 animate-spin">⚪</span>
+                </button>
+
+                <button class="action-icon-btn" id="mic-btn" title="Voice Input">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                        <line x1="12" y1="19" x2="12" y2="23" />
+                        <line x1="8" y1="23" x2="16" y2="23" />
+                    </svg>
+                </button>
+
+                <button class="action-icon-btn secondary" id="upload-btn" title="Browse Files"
+                    onclick="document.getElementById('task-file-input').click()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                </button>
+                <input type="file" id="task-file-input" class="hidden"
+                    accept=".pdf,.docx,.pptx,.xlsx,.txt,.md,.png,.jpg,.jpeg">
+            </div>
+
+            <div class="drop-zone mt-4 transition-all" id="drop-zone">
+                <p class="text-sm font-bold opacity-70" id="file-name-display">Drag & drop files here</p>
+                <p class="text-[10px] opacity-40 uppercase tracking-widest font-bold">PDF, DOCX, IMG, PPTX</p>
+            </div>
+
+            <!-- Scripts for File Handling UI -->
+            <script>
+                const fileInput = document.getElementById('task-file-input');
+                const dropZone = document.getElementById('drop-zone');
+                const nameDisplay = document.getElementById('file-name-display');
+
+                fileInput.addEventListener('change', (e) => {
+                    if (e.target.files.length > 0) {
+                        nameDisplay.textContent = e.target.files[0].name;
+                        dropZone.classList.add('bg-blue-500/10', 'border-blue-500');
+                    }
+                });
+            </script>
+        </div>
+
+        <!-- Task List Output -->
+        <div id="task-list-container" class="mt-8 max-w-2xl mx-auto">
+            <!-- Tasks will appear here -->
+        </div>
+
+        <!-- Mindmap Button (Hidden by default) -->
+        <div id="visual-btn-container" class="text-center mt-6 hidden">
+            <button id="visualize-btn"
+                class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-medium transition-all flex items-center gap-2 mx-auto">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 9V3"></path>
+                    <path d="M12 21v-6"></path>
+                    <path d="M9 12H3"></path>
+                    <path d="M21 12h-6"></path>
+                </svg>
+                Visualize (Mindmap)
+            </button>
+        </div>
+
+        <!-- Mermaid Modal -->
+        <div id="mermaid-modal"
+            class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center backdrop-blur-sm">
+            <div
+                class="bg-white dark:bg-zinc-900 w-full max-w-5xl h-[90vh] rounded-3xl p-6 relative flex flex-col shadow-2xl overflow-hidden">
+                <button id="close-mermaid"
+                    class="absolute top-4 right-4 p-2 opacity-50 hover:opacity-100 dark:text-white z-10">✕</button>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold dark:text-white">Task Flow</h3>
+                    <div class="flex gap-2">
+                        <button id="download-mermaid"
+                            class="text-xs bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded hover:bg-gray-200 dark:text-white">Download
+                            SVG</button>
+                    </div>
+                </div>
+                <div class="flex-1 bg-gray-50 dark:bg-zinc-800 rounded-xl overflow-auto p-4 flex items-center justify-center relative"
+                    id="mermaid-container">
+                    <div id="mermaid-loading"
+                        class="absolute inset-0 flex items-center justify-center hidden bg-white/50 dark:bg-black/50 z-20">
+                        <span class="animate-spin text-2xl">⏳</span> Generating...
+                    </div>
+                    <div class="mermaid-output w-full h-full flex items-center justify-center"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Mermaid.js -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+        window.mermaid = mermaid;
+    </script>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.7)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+
+        document.querySelectorAll('a, button, textarea, .switch, .drop-zone').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.5)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+
+        // Menu Functionality
+        const menuBtn = document.getElementById('menu-btn');
+        const closeMenu = document.getElementById('close-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        menuBtn.addEventListener('click', () => menuOverlay.classList.add('active'));
+        closeMenu.addEventListener('click', () => menuOverlay.classList.remove('active'));
+
+        // Accessibility Toggles
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const dyslexiaToggle = document.getElementById('dyslexia-toggle');
+        const body = document.getElementById('app-body');
+
+        darkModeToggle.addEventListener('change', () => body.classList.toggle('dark-mode'));
+        dyslexiaToggle.addEventListener('change', () => body.classList.toggle('dyslexia-font'));
+
+        // User Session & Navigation Logic
+        (function () {
+            // Drag and Drop Visuals (Scoped)
+            const dropZone = document.getElementById('drop-zone');
+            if (dropZone) {
+                ['dragenter', 'dragover'].forEach(e => dropZone.addEventListener(e, (evt) => {
+                    evt.preventDefault();
+                    dropZone.classList.add('bg-blue-500/10', 'border-blue-500');
+                }));
+                ['dragleave', 'drop'].forEach(e => dropZone.addEventListener(e, (evt) => {
+                    evt.preventDefault();
+                    // On drop, we might want to keep it active if file is valid, but for now simple toggle
+                    if (e === 'dragleave') dropZone.classList.remove('bg-blue-500/10', 'border-blue-500');
+                }));
+
+                dropZone.addEventListener('drop', (e) => {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    const fileInput = document.getElementById('task-file-input');
+                    const nameDisplay = document.getElementById('file-name-display');
+
+                    if (files.length > 0) {
+                        fileInput.files = files; // Assign dropped files to input
+                        nameDisplay.textContent = files[0].name;
+                        dropZone.classList.add('bg-blue-500/10', 'border-blue-500');
+                    }
+                });
+            }
+
+            // User Data
+            const userData = JSON.parse(localStorage.getItem('easein-user') || 'null');
+            const nameEl = document.getElementById('user-display-name');
+
+            if (userData && userData.given_name) {
+                if (nameEl) nameEl.textContent = userData.given_name;
+            } else if (userData && userData.name) {
+                if (nameEl) nameEl.textContent = userData.name.split(' ')[0];
+            }
+
+            // Update Avatar
+            const avatarEl = document.getElementById('user-avatar');
+            if (userData && avatarEl) {
+                const photoUrl = userData.picture || userData.photoURL;
+                if (photoUrl) {
+                    avatarEl.src = photoUrl;
+                }
+            }
+
+            // Sign out
+            const signOutBtn = document.getElementById('sign-out-btn');
+            if (signOutBtn) {
+                signOutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem('easein-user');
+                    localStorage.removeItem('easein-logged-in');
+                    window.location.href = 'continue.html';
+                });
+            }
+        })();
+    </script>
+    <script src="gamification.js"></script>
+    <script src="task-engine.js"></script>
+    <script src="theme.js"></script>
+</body>
+
+</html>

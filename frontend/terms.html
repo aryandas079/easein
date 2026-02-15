@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | easein</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%234d79ff%22 opacity=%220.2%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22 fill=%22%234d79ff%22 font-family=%22sans-serif%22 font-weight=%22bold%22>e</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap');
+
+        /* Accessibility: Dyslexia Friendly Font Styles */
+        .dyslexia-font {
+            font-family: 'Lexend', sans-serif !important;
+            letter-spacing: 0.15ch !important;
+            word-spacing: 0.3ch !important;
+            line-height: 1.6 !important;
+        }
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-blue: #4d79ff;
+        }
+
+        .dark-mode {
+            --bg-color: #0f0f0f;
+            --text-color: #f5f5f5;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            cursor: none !important;
+            line-height: 1.6;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            width: 14px;
+            height: 14px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        a,
+        button {
+            cursor: none !important;
+        }
+
+        /* Grainy Background */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .gradient-sphere {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(255, 77, 77, 0.08) 0%, rgba(77, 121, 255, 0.08) 50%, transparent 70%);
+            filter: blur(100px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 2rem;
+            padding: 3rem;
+        }
+
+        .dark-mode .content-card {
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .return-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            opacity: 0.6;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .return-btn:hover {
+            opacity: 1;
+            transform: translateX(-5px);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body id="app-body">
+    <div id="cursor"></div>
+    <div class="grain-overlay"></div>
+    <div class="gradient-sphere"></div>
+
+    <a href="index.html" class="return-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6" />
+        </svg>
+        return
+    </a>
+
+    <main class="relative z-10 max-w-4xl mx-auto py-32 px-6">
+        <div class="content-card">
+            <p class="text-sm font-bold uppercase tracking-widest opacity-40 mb-2">Legal Documentation</p>
+            <h1>Terms & Conditions</h1>
+            <p class="mb-12">Last Updated: February, 2026</p>
+
+            <section>
+                <h2>1. Acceptance of Terms</h2>
+                <p>By accessing and using easein, you acknowledge that you have read, understood, and agree to be bound
+                    by these Terms and Conditions. Our platform is specifically designed to support neurodiverse
+                    individuals, and your use of the service constitutes acceptance of our simplified task-management
+                    methodology.</p>
+            </section>
+
+            <section>
+                <h2>2. Use of Service</h2>
+                <p>easein provides tools to break down complex tasks. You agree to use the service only for lawful
+                    purposes and in a way that does not infringe the rights of others. We reserve the right to modify or
+                    discontinue features that do not align with our core goal of reducing cognitive load.</p>
+            </section>
+
+            <section>
+                <h2>3. Privacy & Data</h2>
+                <p>Your privacy is paramount. We handle your data with extreme care, ensuring that task lists and
+                    personal preferences are stored securely. For any data-related inquiries, please contact us at
+                    <strong>dasaryan715@gmail.com</strong>.
+                </p>
+            </section>
+
+            <section>
+                <h2>4. Accessibility Commitment</h2>
+                <p>We strive to provide a stable, dyslexia-friendly, and ADHD-inclusive environment. While we provide
+                    specialized fonts and modes (e.g., Dyslexia Font, Dark Mode), the user acknowledges that software is
+                    an evolving tool and we continuously iterate based on user feedback.</p>
+            </section>
+
+            <section>
+                <h2>5. Intellectual Property</h2>
+                <p>The "easein" name, logo, custom grainy aesthetic, and "atomization" logic are the exclusive property
+                    of easein. Unauthorized reproduction or "scraping" of our unique task-breakdown algorithms is
+                    strictly prohibited.</p>
+            </section>
+
+            <section>
+                <h2>6. Limitation of Liability</h2>
+                <p>easein is a productivity aid. We are not responsible for missed deadlines or personal outcomes
+                    resulting from the use of the platform. The "simple" breakdown of tasks is suggestive and should be
+                    used at the user's discretion.</p>
+            </section>
+
+            <section>
+                <h2>7. Contact</h2>
+                <p>Questions about these Terms should be sent to us at:<br>
+                    <a href="mailto:dasaryan715@gmail.com"
+                        class="text-blue-500 underline decoration-blue-500/30">dasaryan715@gmail.com</a>
+                </p>
+            </section>
+
+            <div class="mt-20 pt-10 border-t border-black/5 dark:border-white/5 opacity-40 text-sm">
+                © 2026 easein. All rights reserved. Designed for focus.
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.7)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.5)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+
+        // Optional: Check for system dark mode preference or handle theme classes
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // document.body.classList.add('dark-mode'); 
+            // Note: In a real app, this would be synced with localStorage/state from index.html
+        }
+
+        // ── Buttery Smooth Scroll Engine ──
+        (function () {
+            let current = window.scrollY;
+            let target = current;
+            let rafId = null;
+            const LERP = 0.1;        // easing factor (higher = snappier, lower = floatier)
+            const WHEEL_MULT = 1.5;  // amplify mouse wheel
+            const PIXEL_STEP = 100;  // normalize line-mode delta
+
+            function getMaxScroll() {
+                return Math.max(0, document.body.scrollHeight - window.innerHeight);
+            }
+
+            window.addEventListener('wheel', function (e) {
+                e.preventDefault();
+                // Normalize: deltaMode 1 = lines, 0 = pixels
+                let delta = e.deltaY;
+                if (e.deltaMode === 1) delta *= PIXEL_STEP;
+                target += delta * WHEEL_MULT;
+                target = Math.max(0, Math.min(target, getMaxScroll()));
+                if (!rafId) rafId = requestAnimationFrame(animate);
+            }, { passive: false });
+
+            function animate() {
+                current += (target - current) * LERP;
+
+                if (Math.abs(target - current) < 0.5) {
+                    current = target;
+                    window.scrollTo({ top: current, behavior: 'instant' });
+                    rafId = null;
+                    return;
+                }
+
+                window.scrollTo({ top: current, behavior: 'instant' });
+                rafId = requestAnimationFrame(animate);
+            }
+
+            // Sync state when user scrolls via other means (keyboard, touch, scrollbar drag)
+            let syncTimeout;
+            window.addEventListener('scroll', function () {
+                if (!rafId) {
+                    clearTimeout(syncTimeout);
+                    syncTimeout = setTimeout(() => {
+                        current = window.scrollY;
+                        target = current;
+                    }, 50);
+                }
+            });
+
+            window.addEventListener('resize', function () {
+                const max = getMaxScroll();
+                target = Math.min(target, max);
+                current = Math.min(current, max);
+            });
+        })();
+    </script>
+    <script src="theme.js"></script>
+</body>
+
+</html>

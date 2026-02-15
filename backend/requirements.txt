@@ -1,0 +1,10 @@
+flask
+python-dotenv
+google-generativeai
+pypdf
+python-docx
+openpyxl
+python-pptx
+Pillow
+werkzeug
+gpt4all

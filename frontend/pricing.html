@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | easein</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%234d79ff%22 opacity=%220.2%22/><text y=%22.9em%22 x=%225%22 font-size=%2280%22 fill=%22%234d79ff%22 font-family=%22sans-serif%22 font-weight=%22bold%22>e</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap');
+
+        /* Accessibility: Dyslexia Friendly Font Styles */
+        .dyslexia-font {
+            font-family: 'Lexend', sans-serif !important;
+            letter-spacing: 0.15ch !important;
+            word-spacing: 0.3ch !important;
+            line-height: 1.6 !important;
+        }
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-blue: #4d79ff;
+            --accent-red: #ff4d4d;
+        }
+
+        .dark-mode {
+            --bg-color: #0f0f0f;
+            --text-color: #f5f5f5;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            cursor: none !important;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor - Stays a dot even on buttons */
+        #cursor {
+            width: 14px;
+            height: 14px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        a,
+        button,
+        [role="button"],
+        label {
+            cursor: none !important;
+        }
+
+        /* Grainy Background */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .gradient-sphere {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(255, 77, 77, 0.08) 0%, rgba(77, 121, 255, 0.08) 50%, transparent 70%);
+            filter: blur(100px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 2.5rem;
+            padding: 3rem 2rem;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blue);
+        }
+
+        .dark-mode .pricing-card {
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .return-btn {
+            position: fixed;
+            top: 2.5rem;
+            left: 2.5rem;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            opacity: 0.6;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .return-btn:hover {
+            opacity: 1;
+            transform: translateX(-4px);
+        }
+
+        /* Toggle styling */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .switch-pricing {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch-pricing input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-pricing {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ddd;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider-pricing:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider-pricing {
+            background-color: var(--accent-blue);
+        }
+
+        input:checked+.slider-pricing:before {
+            transform: translateX(30px);
+        }
+
+        .discount-badge {
+            background: var(--accent-red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .price-text {
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: -0.05em;
+        }
+
+        .btn-select {
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 1rem;
+            border-radius: 50px;
+            text-align: center;
+            font-weight: 600;
+            margin-top: auto;
+            transition: opacity 0.3s;
+        }
+
+        .btn-select:hover {
+            opacity: 0.9;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 1rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+    </style>
+</head>
+
+<body id="app-body">
+    <div id="cursor"></div>
+    <div class="grain-overlay"></div>
+    <div class="gradient-sphere"></div>
+
+    <a href="index.html" class="return-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6" />
+        </svg>
+        return
+    </a>
+
+    <main class="relative z-10 max-w-6xl mx-auto py-32 px-6 text-center">
+        <p class="text-sm font-bold uppercase tracking-widest opacity-40 mb-3">Investment in your mind</p>
+        <h1 class="text-5xl md:text-6xl font-semibold tracking-tighter mb-6">pricing plans</h1>
+        <p class="max-w-xl mx-auto opacity-60 mb-12">Simple pricing for a simpler mind. No hidden clutter, just clarity.
+        </p>
+
+        <!-- Toggle -->
+        <div class="toggle-container">
+            <span id="monthly-label" class="font-medium opacity-100 transition-opacity">monthly</span>
+            <label class="switch-pricing">
+                <input type="checkbox" id="billing-toggle">
+                <span class="slider-pricing"></span>
+            </label>
+            <span id="annually-label" class="font-medium opacity-40 transition-opacity">annually <span
+                    class="discount-badge">17% off</span></span>
+        </div>
+
+        <!-- Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Basic Plan -->
+            <div class="pricing-card">
+                <h3 class="text-xl font-bold mb-2">basic</h3>
+                <p class="text-sm opacity-50 mb-6">the essential start.</p>
+                <div class="price-container mb-6">
+                    <span class="text-2xl font-light">₹</span>
+                    <span class="price-text" id="price-basic">0</span>
+                    <span class="opacity-40">/mo</span>
+                </div>
+                <ul class="feature-list">
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> 5 active task breakdowns</li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> standard atomization</li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> dyslexia font support</li>
+                </ul>
+                <a href="getstarted.html" class="btn-select">current plan</a>
+            </div>
+
+            <!-- Go Plan -->
+            <div class="pricing-card border-blue-500/20 shadow-xl shadow-blue-500/5">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-xl font-bold mb-2">go</h3>
+                    <span
+                        class="text-[10px] bg-blue-500/10 text-blue-500 px-2 py-1 rounded-full font-bold uppercase tracking-wider">popular</span>
+                </div>
+                <p class="text-sm opacity-50 mb-6">enhanced clarity tier.</p>
+                <div class="price-container mb-6">
+                    <span class="text-2xl font-light">₹</span>
+                    <span class="price-text" id="price-go">299</span>
+                    <span class="opacity-40" id="duration-go">/mo</span>
+                </div>
+                <ul class="feature-list">
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> unlimited task breakdowns</li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> focus-timer integration</li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> priority AI engine</li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> cloud sync</li>
+                </ul>
+                <a href="checkout.html" class="btn-select">upgrade to go</a>
+            </div>
+
+            <!-- Pro Plan -->
+            <div class="pricing-card">
+                <h3 class="text-xl font-bold mb-2">pro</h3>
+                <p class="text-sm opacity-50 mb-6">the full tier experience.</p>
+                <div class="price-container mb-6">
+                    <span class="text-2xl font-light">₹</span>
+                    <span class="price-text" id="price-pro">599</span>
+                    <span class="opacity-40" id="duration-pro">/mo</span>
+                </div>
+                <ul class="feature-list">
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> everything in go</li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> multi-user collaboration</li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> neuro-insight analytics</li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)"
+                            stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" />
+                        </svg> 1-on-1 focus support</li>
+                </ul>
+                <a href="checkout.html" class="btn-select">get full access</a>
+            </div>
+
+        </div>
+
+        <div class="mt-20 opacity-40 text-sm">
+            © 2026 easein. Designed for neurodiversity.
+        </div>
+    </main>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.7)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+
+        document.querySelectorAll('a, button, .switch-pricing').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.5)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+
+        // Pricing Toggle Logic
+        const billingToggle = document.getElementById('billing-toggle');
+        const monthlyLabel = document.getElementById('monthly-label');
+        const annuallyLabel = document.getElementById('annually-label');
+
+        const priceGo = document.getElementById('price-go');
+        const pricePro = document.getElementById('price-pro');
+
+        const durationGo = document.getElementById('duration-go');
+        const durationPro = document.getElementById('duration-pro');
+
+        billingToggle.addEventListener('change', () => {
+            if (billingToggle.checked) {
+                // Annual (17% off approx)
+                monthlyLabel.classList.replace('opacity-100', 'opacity-40');
+                annuallyLabel.classList.replace('opacity-40', 'opacity-100');
+
+                // Go: ₹299 -> ₹249 (approx 17% off)
+                priceGo.innerText = "249";
+                pricePro.innerText = "499";
+
+                durationGo.innerText = "/mo";
+                durationPro.innerText = "/mo";
+            } else {
+                // Monthly
+                monthlyLabel.classList.replace('opacity-40', 'opacity-100');
+                annuallyLabel.classList.replace('opacity-100', 'opacity-40');
+
+                priceGo.innerText = "299";
+                pricePro.innerText = "599";
+
+                durationGo.innerText = "/mo";
+                durationPro.innerText = "/mo";
+            }
+        });
+    </script>
+    <script src="theme.js"></script>
+    <script src="payment.js"></script>
+</body>
+
+</html>

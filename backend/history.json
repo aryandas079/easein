@@ -1,0 +1,328 @@
+[
+  {
+    "tasks": [
+      "Be able to design measuring instruments to measure electrical quantities with minimal error.",
+      "Be able to perform experiments and determine various types of errors during measurements, as",
+      "Be able to analyse industrial based components for their standardisation and health condition",
+      "Be able to design suitable DC and AC bridges for the measurement of resistance, inductance,",
+      "Be able to apply different industrial based measurement techniques and standards.",
+      "Electrical & Electronics Measurements and Instrumentation - A.K. Sawhney, Dhanpat Rai and Sons Publications.",
+      "Electrical Measurement and Measuring Instruments - Golding E. W. and F.C Widdis, Reem Publications Pvt. Ltd.",
+      "Electronic Instrumentation and Measurements - David A. Bell, Oxford University Press India.",
+      "Basic Electrical Measurements - Melville Bigham Stout, Literary Licensing, LLC."
+    ],
+    "prompt": "give me 5 bullet points from this pdf ",
+    "timestamp": "2026-02-15T09:08:52.976Z"
+  },
+  {
+    "tasks": [
+      "Be able to design measuring instruments to measure electrical quantities with minimal error.",
+      "Be able to perform experiments and determine various types of errors during measurements, as",
+      "Be able to analyse industrial based components for their standardisation and health condition",
+      "Be able to design suitable DC and AC bridges for the measurement of resistance, inductance,",
+      "Be able to apply different industrial based measurement techniques and standards.",
+      "Electrical & Electronics Measurements and Instrumentation - A.K. Sawhney, Dhanpat Rai and Sons Publications.",
+      "Electrical Measurement and Measuring Instruments - Golding E. W. and F.C Widdis, Reem Publications Pvt. Ltd.",
+      "Electronic Instrumentation and Measurements - David A. Bell, Oxford University Press India.",
+      "Basic Electrical Measurements - Melville Bigham Stout, Literary Licensing, LLC."
+    ],
+    "prompt": "how to complete the electrical syllabus in 5 steps simply, just tell me ",
+    "timestamp": "2026-02-15T09:02:25.068Z"
+  },
+  {
+    "tasks": [
+      "Define signals and their role in the context of electrical measurement.",
+      "Differentiate between static and dynamic characteristics of measuring instruments.",
+      "Identify and categorize different types of electrical instruments used in industry.",
+      "Study the operating forces required for the working of indicating instruments.",
+      "Compare different types of damping and control systems used in instruments.",
+      "Analyze the construction and working principle of Permanent Magnet Moving Coil (PMMC) instruments.",
+      "Examine the construction and working principles of Moving Iron (MI) instruments.",
+      "Study the principle of Induction type instruments.",
+      "Review the design and operation of Electrodynamometer type instruments.",
+      "List the applications, advantages, and disadvantages of PMMC, MI, and Induction instruments.",
+      "Define calibration and explain its significance in measurement systems.",
+      "Distinguish between precision and accuracy with practical examples.",
+      "Identify and classify various types of measurement errors.",
+      "Research the importance of regular instrument calibration in industrial quality control.",
+      "Derive the equation of motion for a galvanometer under different damping conditions.",
+      "Analyze the dynamic behavior and response of a galvanometer.",
+      "Identify operational constants and Critical Damping Resistance (CDRX).",
+      "Calculate relative damping, logarithmic decrement, and sensitivity for galvanometers.",
+      "Evaluate the role of galvanometers in modern industrial measurement systems.",
+      "Categorize resistance into low, medium, and high measurement ranges.",
+      "Master the Kelvin Double Bridge method for low resistance measurement.",
+      "Apply the Wheatstone bridge for measuring medium resistance.",
+      "Study the operation of a Megger for high resistance and insulation testing.",
+      "Explain the direct deflection method for measuring high resistance.",
+      "Discuss the significance of resistance measurement in household and industrial safety.",
+      "Explain the standardization process for DC and AC potentiometers.",
+      "Describe the principle, construction, and working of the Crompton D.C. potentiometer.",
+      "Compare Polar and Co-ordinate type potentiometers.",
+      "Identify specific industrial use cases for potentiometers.",
+      "Analyze the Maxwell Bridge for measuring inductance.",
+      "Study Hay's Bridge for the measurement of high-Q coils.",
+      "Examine the Schering Bridge for capacitance and dielectric loss measurement.",
+      "Apply the De Sauty Bridge for comparing two capacitors.",
+      "Evaluate the use of AC bridges for precise parameter measurement in manufacturing.",
+      "Study the methods for measurement of electrical power and energy.",
+      "Explain the function and application of Current Transformers (CT).",
+      "Explain the function and application of Potential Transformers (PT).",
+      "Analyze the working of an Electrodynamometer type Wattmeter.",
+      "Investigate the operation of an Induction type energy meter.",
+      "Study the mechanism of Indicating type Frequency meters.",
+      "Review the operation of Electrodynamometer type Power Factor (P.F.) meters.",
+      "Assess the role of power, power factor, and frequency in industrial operations.",
+      "Identify techniques for measuring temperature and pressure in industrial environments.",
+      "Study methods for measuring flow rate and liquid level.",
+      "Review the measurement of physical dimensions and chemical composition.",
+      "Practice measuring voltage, current, and resistance using multi-meters and specialized ammeters.",
+      "Examine methods for measuring mechanical properties like hardness, strain, and torque.",
+      "Explain the importance of material characterization in industrial quality control.",
+      "Design a basic measuring instrument aimed at minimizing measurement error.",
+      "Execute experimental setups to determine and interpret measurement errors.",
+      "Analyze industrial components to assess their health condition and standardization.",
+      "Design suitable DC bridges for resistance measurement tasks.",
+      "Design suitable AC bridges for measuring inductance, capacitance, and frequency.",
+      "Acquire and review the textbook by A.K. Sawhney for theoretical foundations.",
+      "Consult the Golding and Widdis textbook for advanced measurement principles.",
+      "Reference David A. Bell\u2019s text for electronic instrumentation specific details."
+    ],
+    "prompt": "how to complete the electrical syllabus in 5 steps simply, just tell me ",
+    "timestamp": "2026-02-15T09:01:20.934Z"
+  },
+  {
+    "tasks": [
+      "Define and categorize electrical signals used in measurement systems",
+      "Analyze the static characteristics of measuring instruments",
+      "Analyze the dynamic characteristics of measuring instruments",
+      "Identify different types of instruments used in electrical engineering",
+      "Study the operating forces required for indicating instruments",
+      "Examine different types of damping systems used in meters",
+      "Examine different types of control systems used in meters",
+      "Detail the construction and working principles of PMMC instruments",
+      "Detail the construction and working principles of Moving Iron (MI) instruments",
+      "Detail the construction and working principles of Induction type instruments",
+      "Detail the construction and working principles of Electrodynamometer type instruments",
+      "Summarize applications, advantages, and disadvantages of PMMC and MI instruments",
+      "Define calibration and its significance in measurement accuracy",
+      "Contrast precision and accuracy within measurement parameters",
+      "Identify and classify various types of measurement errors",
+      "Research the importance of calibration within industrial settings",
+      "Model the dynamic behavior and equation of motion for galvanometers",
+      "Analyze galvanometer response under different damping conditions",
+      "Define operational constants and Critical Damping Resistance (CDRX)",
+      "Calculate relative damping and logarithmic decrement for galvanometers",
+      "Determine the sensitivity of galvanometers in measurement systems",
+      "Assess the role of galvanometers in industrial measurement systems",
+      "Implement the Kelvin Double Bridge method for low resistance measurement",
+      "Implement the Wheatstone bridge for medium resistance measurement",
+      "Apply the Megger or direct deflection method for high resistance measurement",
+      "Explain the significance of resistance measurement in industry and households",
+      "Standardize a potentiometer for precise measurement",
+      "Explain the principle and construction of the Crompton D.C. potentiometer",
+      "Compare Polar and Co-ordinate type AC potentiometers",
+      "Identify industrial use cases for DC and AC potentiometers",
+      "Design a Maxwell Bridge for inductance measurement",
+      "Design a Hay's Bridge for inductive impedance measurement",
+      "Design a Schering Bridge for capacitance measurement",
+      "Design a De Sauty Bridge for capacitance comparison",
+      "Evaluate the use of AC bridges for quality control in manufacturing",
+      "Explain the measurement of power and energy in electrical systems",
+      "Study the application of Current Transformers (CT) in power measurement",
+      "Study the application of Potential Transformers (PT) in power measurement",
+      "Analyze the operation of Electrodynamometer type Wattmeters",
+      "Analyze the operation of Induction type energy meters",
+      "Detail the working of Indicating type Frequency meters",
+      "Detail the working of Electrodynamometer type Power Factor (P.F.) meters",
+      "Evaluate the impact of power factor and frequency on industrial operations",
+      "Explore industrial measurement techniques for temperature and pressure",
+      "Explore industrial measurement techniques for flow rate and liquid level",
+      "Identify methods for measuring physical dimensions and chemical composition",
+      "Utilize multi-meters and ammeters for measuring electrical parameters",
+      "Measure mechanical properties including hardness, strain, and torque",
+      "Relate industrial measurements to material characterization and quality control",
+      "Acquire the textbook by A.K. Sawhney for measurement studies",
+      "Acquire the textbook by Golding and Widdis for measurement studies",
+      "Review reference materials by David A. Bell and Melville Bigham Stout",
+      "Design measuring instruments to minimize measurement errors",
+      "Perform experiments to analyze and interpret measurement results",
+      "Analyze industrial components for standardization and health condition",
+      "Design suitable DC and AC bridges for specific electrical parameters",
+      "Apply industrial-based measurement techniques and standards to practical scenarios"
+    ],
+    "prompt": "ELECTRICAL SYLLABUS.pdf",
+    "timestamp": "2026-02-15T08:55:28.219Z"
+  },
+  {
+    "tasks": [
+      "Define and classify static and dynamic characteristics of measuring instruments",
+      "Analyze the operating forces required for indicating instruments, including deflecting, controlling, and damping forces"
+    ],
+    "prompt": "ELECTRICAL SYLLABUS.pdf",
+    "timestamp": "2026-02-15T08:53:50.099Z"
+  },
+  {
+    "tasks": [
+      "Define and classify signals and measurement instruments",
+      "Analyze static and dynamic characteristics of measuring instruments",
+      "\"Identify operating forces required for indicating instruments, including damping and control systems"
+    ],
+    "prompt": "ELECTRICAL SYLLABUS.pdf",
+    "timestamp": "2026-02-15T08:51:47.310Z"
+  },
+  {
+    "tasks": [
+      "Analyze the static and dynamic characteristics of instruments along with the operating forces required for indicating instruments.",
+      "Study the construction, working principles, and applications of PMMC, MI, Induction, and Electrodynamometer type instruments.",
+      "Define calibration procedures and evaluate the impact of precision, accuracy, and measurement errors in industrial settings.",
+      "Derive the equation of motion for galvanometers and determine operational constants like CDRX and logarithmic decrement.",
+      "Compare methods for measuring low, medium, and high resistance using Kelvin Double Bridge, Wheatstone bridge, and Megger.",
+      "Demonstrate the standardization and working principle of Crompton D.C. potentiometers and AC polar/coordinate types.",
+      "Apply Maxwell, Hay\u2019s, Schering, and De Sauty bridges to measure inductance, capacitance, and frequency.",
+      "Assess the role of Current Transformers (CT) and Potential Transformers (PT) in measuring power, energy, and power factor.",
+      "Identify industrial measurement techniques for non-electrical parameters including temperature, pressure, flow rate, and torque.",
+      "Utilize the recommended textbooks by A.K. Sawhney and Golding & Widdis to design measuring instruments with minimal error."
+    ],
+    "prompt": "make 10 task from it \n",
+    "timestamp": "2026-02-15T08:48:50.366Z"
+  },
+  {
+    "tasks": [
+      "Define and classify signals in the context of electrical measurement",
+      "Analyze static and dynamic characteristics of measuring instruments",
+      "\"Identify operating forces including deflecting, controlling,"
+    ],
+    "prompt": "ELECTRICAL SYLLABUS.pdf",
+    "timestamp": "2026-02-15T08:48:25.324Z"
+  },
+  {
+    "tasks": [
+      "Review the course syllabus covering Units 1 through 8.",
+      "\"Note the marks distribution: 50% End Semester, 30% Mid"
+    ],
+    "prompt": "UNIT1_AND_iNTRODUCTION_student_.pdf",
+    "timestamp": "2026-02-15T08:46:08.200Z"
+  },
+  {
+    "tasks": [
+      "Error: Could not generate tasks. API Quota exceeded and offline parsing failed."
+    ],
+    "prompt": "ELECTRICAL SYLLABUS.pdf",
+    "timestamp": "2026-02-15T08:40:55.960Z"
+  },
+  {
+    "tasks": [
+      "[\"Summarize the static and dynamic characteristics of measuring instruments from Unit 1.\", \"Compare the construction and working principles of PMMC, MI, and Electrodynamometer type instruments.\", \"Define the significance of calibration and calculate measurement errors using precision and accuracy parameters.\", \"Analyze the dynamic behavior of galvanometers by deriving equations of motion for different damping conditions.\", \"Differentiate between Kelvin Double Bridge, Wheatstone bridge, and Megger methods for measuring various resistance levels.\", \"Outline the standardization process and industrial applications of Crompton DC and AC potentiometers.\", \"Apply Maxwell, Hay's, and Schering bridges to calculate unknown impedance and electrical parameters.\", \"Explain the role of Current Transformers (CT) and Potential Transformers (PT) in measuring power and energy.\", \"Identify measurement techniques for industrial parameters such as temperature, pressure, flow rate, and liquid level.\", \"Utilize the recommended textbooks by A.K. Sawhney or Golding & Widdis to solve practice problems"
+    ],
+    "prompt": "make me 10 task from this ",
+    "timestamp": "2026-02-15T08:35:30.782Z"
+  },
+  {
+    "tasks": [
+      "[",
+      "\"Define signals and general measurement instruments.\",",
+      "\"Analyze static and dynamic characteristics of instruments.\",",
+      "\"Identify different types of instruments and their operating forces.\","
+    ],
+    "prompt": "ELECTRICAL SYLLABUS.pdf",
+    "timestamp": "2026-02-15T08:35:09.006Z"
+  },
+  {
+    "tasks": [
+      "[",
+      "\"Define Restoring Force (Hooke's Law) and Newton's Equation for a Spring-Mass System\",",
+      "\"Formulate and solve the SHM Differential Equation\","
+    ],
+    "prompt": "Physics Formulas.pdf",
+    "timestamp": "2026-02-15T08:34:31.424Z"
+  },
+  {
+    "tasks": [
+      "12 kx^2$).",
+      "14. Calculate Kinetic Energy ($KE = \\frac12 k(A^2 - x^2)$).",
+      "15. Verify Total Mechanical Energy ($E = \\frac12 kA^2$).",
+      "16. Analyze Energy Ratio Relations ($KE/E$ and $PE/E$).",
+      "17. Identify Energy states at the Mean Position.",
+      "18. Identify Energy states at the Extreme Position.",
+      "19. Study Part B: Damped Harmonic Oscillator.",
+      "20. Define Damping Force ($F_d = -\\gamma \\frac{dx}{dt}$).",
+      "21. Calculate Damping Constant ($\\beta = \\gamma/2m$).",
+      "22. Formulate the Damped SHM Equation.",
+      "23."
+    ],
+    "prompt": "Physics Formulas.pdf",
+    "timestamp": "2026-02-15T08:18:12.203Z"
+  },
+  {
+    "tasks": [
+      "[\"Review Restoring Force and Hooke's Law formula\", \"Understand Newton's Equation for a Spring-Mass System\", \"Memorize the SHM Differential Equation\", \"Calculate Natural Angular"
+    ],
+    "prompt": "Physics Formulas.pdf",
+    "timestamp": "2026-02-15T08:12:47.172Z"
+  },
+  {
+    "tasks": [
+      "Error: Could not generate tasks. API Quota exceeded and offline parsing failed."
+    ],
+    "prompt": "Physics Formulas.pdf",
+    "timestamp": "2026-02-15T08:09:57.805Z"
+  },
+  {
+    "tasks": [
+      "Error: Could not generate tasks. API Quota exceeded and offline parsing failed."
+    ],
+    "prompt": "Physics Formulas.pdf",
+    "timestamp": "2026-02-15T08:09:52.932Z"
+  },
+  {
+    "tasks": [
+      "[",
+      "\"Define the Restoring Force and state Hooke\u2019s Law mathematically.\",",
+      "\"Identify the physical significance of the spring constant and displacement in the Hooke"
+    ],
+    "prompt": "just tell me how to learn all the formulas in step by step \n",
+    "timestamp": "2026-02-15T08:09:06.701Z"
+  },
+  {
+    "tasks": [
+      "[",
+      "\"Create a dedicated formula sheet or digital flashcard deck for 'Oscillations & Waves'.\",",
+      "\"Memorize the basic SHM set: Restoring Force (Hooke"
+    ],
+    "prompt": "make me a workflow on how to memorise all the formulas ",
+    "timestamp": "2026-02-15T08:05:03.759Z"
+  },
+  {
+    "tasks": [
+      "Error: Could not generate tasks. API Quota exceeded and offline parsing failed."
+    ],
+    "prompt": "find me how to make my profile like thjs one ",
+    "timestamp": "2026-02-15T08:01:21.264Z"
+  },
+  {
+    "tasks": [
+      "Error: Could not generate tasks. API Quota exceeded and offline parsing failed."
+    ],
+    "prompt": "make me a detailed breakdown workflow task on how to memorise the task ",
+    "timestamp": "2026-02-15T07:57:55.624Z"
+  },
+  {
+    "tasks": [
+      "Prep the skin with a hydrating moisturizer and a smoothing primer.",
+      "Apply a medium-coverage foundation for an even, natural-looking base.",
+      "Sweep a neutral, light-toned eyeshadow across the eyelids.",
+      "Define the upper lash line with a thin stroke of black eyeliner.",
+      "Apply several coats of lengthening black mascara to the upper lashes.",
+      "Dust a soft peach or pink blush onto the apples of the cheeks.",
+      "Line and fill the lips with a classic, vibrant red lipstick.",
+      "Blow-dry hair using a round brush to add volume at the roots.",
+      "Use a large-barrel curling iron to create soft, loose waves throughout the hair.",
+      "Style the bangs to sweep across the forehead to one side.",
+      "Set the hairstyle with a light-hold hairspray to maintain movement.",
+      "Select a white lace top or dress with an intricate floral pattern."
+    ],
+    "prompt": "taylor swift.jpg",
+    "timestamp": "2026-02-15T07:46:17.579Z"
+  }
+]
